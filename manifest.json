@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Github Copy File Path",
+  "version": "0.1",
+  "description": "Lets you click file paths to copy them to your clipboard.",
+  "background": {
+    "scripts": ["backgroundPage.js"],
+    "persistent": false
+  },
+  "content_scripts": [{
+      "matches": ["http://github.com/*", "https://github.com/*"],
+      "js": ["jquery-2.1.0.min.js", "content.js"]
+  }],
+  "permissions": [
+    "clipboardWrite",
+    "http://github.com/",
+    "https://github.com/"
+  ]
+}
