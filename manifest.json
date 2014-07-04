@@ -9,13 +9,6 @@
     "38": "images/icon38.png",
     "128": "images/icon128.png"
   },
-  "page_action": {
-    "default_icon": {
-      "19": "images/icon19.png",
-      "38": "images/icon38.png"
-    },
-    "default_title": "GitHub Copy"
-  },
   "background": {
     "scripts": ["backgroundPage.js"],
     "persistent": false
