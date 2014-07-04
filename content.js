@@ -1,29 +1,41 @@
 jQuery(function($){
-  var reviewBoxes = $(".inline-review-comment .box-header code span");
-  reviewBoxes
-    .each(function(){
-      $(this).css("cursor", "pointer");
-    })
-    .on('click', function(e){
-      var el = $(this);
-      var file_path = el.text();
-      copyToClipboard(file_path);
+  
+  var selectors = [
+    ".inline-review-comment .box-header code span",
+    ".file .meta .info .js-selectable-text"
+  ].join(',');
+
+  var selectorDataPathParents = [
+    ".box-header",
+    ".meta"
+  ].join(',');
+
+  $(selectors).each(function(){
+    $(this).css("cursor", "pointer");
+  })
+  .click(function(e){
+    var el = $(this),
+    file_path = el.text(),
+    full_file_path = el.closest(selectorDataPathParents).data('path');
+
+    sendCopyToClipboardMessage(el, full_file_path, function(){
       el.fadeOut(100, function(){
         el.text('Copied to clipboard...').fadeIn(100, function(){
-          el.delay(2000).fadeOut(100, function(){
+          el.delay(1000).fadeOut(100, function(){
             el.text(file_path).fadeIn(100);
           });
         });
-      });
-      e.preventDefault();
+      });   
     });
+    
+    e.preventDefault();
+  });
 });
 
-function copyToClipboard(text) {
-  var message = { method: "copy", text: text };
-  chrome.runtime.sendMessage(message, function(response){
-    if( response ){
-      console.log(response);
+function sendCopyToClipboardMessage(el, text, callback) {
+  chrome.runtime.sendMessage(text, function(response){
+    if(response){
+      callback();
     } else {
       console.log("An error occurred: " + chrome.runtime.lastError);
     }

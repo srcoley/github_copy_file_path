@@ -1,7 +1,6 @@
 chrome.runtime.onMessage.addListener(function(msg, _, sendResponse){
-  if( msg.method && msg.method === "copy" && msg.text ){
-    var wasCopied = copyTextToClipboard(msg.text);
-    sendResponse({ response: wasCopied });
+  if(msg){
+    sendResponse(copyTextToClipboard(msg));
   } else {
     sendResponse(msg);
   }
