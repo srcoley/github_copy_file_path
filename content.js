@@ -2,7 +2,8 @@ jQuery(function($){
   
   var selectors = [
     ".inline-review-comment .box-header code span",
-    ".file .meta .info .js-selectable-text"
+    ".file .meta .info .js-selectable-text",
+    ".gh-header-meta .flex-table-item-primary span.commit-ref:last-child span"
   ].join(',');
 
   var selectorDataPathParents = [
@@ -14,9 +15,13 @@ jQuery(function($){
     $(this).css("cursor", "pointer");
   })
   .click(function(e){
-    var el = $(this),
-    file_path = el.text(),
-    full_file_path = el.closest(selectorDataPathParents).data('path');
+    var el = $(this);
+    var file_path = el.text();
+    if(el.is(".css-truncate-target")) {
+      var full_file_path = file_path;
+    } else {
+      var full_file_path = el.closest(selectorDataPathParents).data('path');
+    }
 
     sendCopyToClipboardMessage(el, full_file_path, function(){
       el.fadeOut(100, function(){

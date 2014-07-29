@@ -2,8 +2,8 @@
   "manifest_version": 2,
   "name": "GitHub Copy",
   "author": "Stephen Coley",
-  "version": "0.2",
-  "description": "Lets you click file paths to copy them to your clipboard.",
+  "version": "0.3",
+  "description": "Lets you click file paths and branch names to copy them to your clipboard.",
   "icons": {
     "19": "images/icon19.png",
     "38": "images/icon38.png",
